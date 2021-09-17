@@ -1,17 +1,17 @@
-#-- Compilation
+# Compilation
 go-starter: go.sum main.go */**/*.go .env */**/**/*.go
 	./scripts/build.sh
 
 go-starter.exe : go.sum main.go */**/*.go .env */**/**/*.go
 	env CC=x86_64-w64-mingw32-gcc CGO_ENABLED=1 GOOS=windows GOARCH=amd64 ./scripts/build.sh
 
-#-- obtention des dépendances
+# fetch dépendencies
 go.sum : go.mod
 	go get
 	go mod tidy
 
 .PHONY: install deb docs win all clean manuals
-#-- Pour installer sur le système, requiert les droits sur $(DESTDIR)
+# require write rights for $(DESTDIR)
 install : go-starter
 	mkdir -p $(DESTDIR)/usr/sbin/
 	cp ./go-starter $(DESTDIR)/usr/sbin/go-starter
