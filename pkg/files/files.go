@@ -7,18 +7,15 @@ import (
 	"strings"
 )
 
-//-- Author : Ponsard Nils
-//-- Last update : 10/08/2021
-
-// Fonction : parse le chemin en remplaçant le ~ par le dossier home
+// Parse a path, replaces ~ with the home directory
 func ParsePath(p string) string {
 
-	//-- Compatibilité avec Windows
+	// use the right separator (windows)
 
 	parts := strings.Split(p, "/")
 	joinedPath := path.Join(parts...)
 
-	//-- on cherche le dossier de l’utilisateur
+	// get home folder
 
 	homedir, err := os.UserHomeDir()
 
@@ -26,24 +23,16 @@ func ParsePath(p string) string {
 		log.Fatal("Could not find the home dir : ", err)
 	}
 
-	//-- On remplace le tilde par le dossier utilisateur
-
 	return path.Clean(strings.ReplaceAll(joinedPath, "~", homedir))
 }
 
-//-- Author : Ponsard Nils
-//-- Last update : 10/08/2021
-
-// Fonction : s’assure que le dossier existe, le crée sinon
+// Ensure that the folder of the path exists (name before the last foward slash)
 func EnsureFolder(p string) {
 	base := path.Dir(p)
 	os.MkdirAll(base, 0755)
 }
 
-//-- Author : Ponsard Nils
-//-- Last update : 10/08/2021
-
-// Fonction : vérifie si le fichier existe
+// Checks if the file exists
 func Exists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err == nil {
