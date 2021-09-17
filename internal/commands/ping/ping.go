@@ -5,16 +5,14 @@ import (
 	"github.com/nilsponsard/go-starter/pkg/verbosity"
 )
 
-//-- Fonction : configure la commande `ping`
-//-- Author : Ponsard Nils
-//-- Last update : 11/08/2021
+// setup ping command
 func Ping(job *cli.Cmd) {
 
-	//- les arguments
+	// arguments
 
 	pong := job.BoolOpt("p pong", false, "Answer ping")
 
-	//-- La fonction à exécuter
+	// function to execute
 
 	job.Action = func() {
 
