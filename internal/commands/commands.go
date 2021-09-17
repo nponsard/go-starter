@@ -5,13 +5,7 @@ import (
 	"github.com/nilsponsard/go-starter/internal/commands/ping"
 )
 
-var devMode = true
-
-//-- Author : Ponsard Nils
-//-- Last update :27/08/2021
-
-// configure toutes les sous-commandes
+// configure subcommands
 func SetupCommands(app *cli.Cli) {
-
 	app.Command("ping", "ping", ping.Ping)
 }
