@@ -9,44 +9,54 @@ import (
 )
 
 var (
+	//-- La struct permettant de log dans un fichier, à configurer avec SetupLog()
 	logToFile log.Logger
 	verbose   = false
 	saveLog   = true
 )
 
-// Set verbosity level and log file
+//-- Author : Ponsard Nils
+//-- Last update : 17/08/2021
+
+// Fonction : Définie le niveau de verbosité et ouvre le ficher log
 func SetupLog(VerbosityActive bool, logPath string, SaveLog bool) {
 	saveLog = SaveLog
 	verbose = VerbosityActive
 
-	// Opens the log file in append mode
+	//-- Ouvre le fichier de sortie en mode Append (crée si le fichier n’existe pas)
 	if saveLog {
 
 		logFile, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
-		// can’t open file, exit
+		//-- on peut pas continuer sans fichier log, donc on crash
 
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		// create logger
+		//-- Crée la struct permettant de log dans le fichier
 
 		logToFile = *log.New(logFile, "", log.LstdFlags)
 
 		logToFile.Println("------- New execution")
+
 		logToFile.Println(os.Args)
 	}
 }
 
-// Writes to terminal an log file
+//-- Author : Ponsard Nils
+//-- Last update : 11/08/2021
+
+// Fonction : Écrit dans la sortie Standard et le fichier de log en même temps
 func doubleLog(chosenColor string, level string, v ...interface{}) {
 
-	// show debug to terminal only when verbose
+	//-- on affiche dans les deux sorties
+
+	//-- On affiche le debug qu’en mode verbose
 
 	if level != "Debug : " || verbose {
 
-		// no timestamp in the terminal
+		//-- pas de timestamp sur la première sortie
 
 		fmt.Print(chosenColor)
 		fmt.Print(level)
@@ -57,35 +67,53 @@ func doubleLog(chosenColor string, level string, v ...interface{}) {
 
 	if saveLog {
 
-		// Save to file
+		//-- Sauvegarde dans le fichier
 
 		a := append([]interface{}{level}, v...)
 		logToFile.Println(a...)
 	}
 }
 
-// Debug message, shown when verbose mode is on. Always logged to file
+//-- Author : Ponsard Nils
+//-- Last update : 12/08/2021
+
+// Fonction : Affiche le message si la verbosité est activée
 func Debug(v ...interface{}) {
 	doubleLog(color.Blue, "Debug : ", v...)
 }
 
-// Send message to user
+//-- Author : Ponsard Nils
+//-- Last update : 23/04/2021
+
+// Fonction : Affiche le message même si la verbosité est activée
 func Info(v ...interface{}) {
 	doubleLog("", "", v...)
 }
 
-// Error message
+//-- Author : Ponsard Nils
+//-- Last update : 23/04/2021
+
+// Fonction : Affiche le message d’erreur
 func Error(v ...interface{}) {
 	doubleLog(color.Red, "Error : ", v...)
 }
 
-// Show error then exits
+//-- Author : Ponsard Nils
+//-- Last update : 23/04/2021
+
+// Affiche l’erreur et ferme le programme
 func Fatal(v ...interface{}) {
 	doubleLog(color.Red, "Fatal : ", v...)
+
+	//-- Arrête le programme avec le code d’erreur 1
+
 	os.Exit(1)
 }
 
-// Show a warning
+//-- Author : Ponsard Nils
+//-- Last update : 23/04/2021
+
+// Fonction : Affiche le message de warning
 func Warning(v ...interface{}) {
 	doubleLog(color.Yellow, "Warning : ", v...)
 }
