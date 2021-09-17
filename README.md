@@ -8,4 +8,4 @@ Les fichiers sources concernant le programme
 ### pkg 
 Les fichiers sources pouvant être réutilisés (ex : système de log)
 ### assets
-Fichiers utilisés par le programme (ici le certificat et la clef)
+Fichiers utilisés par le programme
