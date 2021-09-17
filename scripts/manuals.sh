@@ -8,10 +8,6 @@ TITLE_FR="Manuel d’utilisation de ${NAME} version ${VERSION}"
 TITLE_EN="${NAME} user’s manual for version ${VERSION}"
 
 
-
-
-# mkdir -p $DEST
-
 cd manuals/fr
 
 pandoc ${FILES} --template=../template.html --toc -V toc-title:"Sommaire" -V title:"$TITLE_FR" -o ../../${DEST}manuel_français.html
@@ -23,6 +19,3 @@ pandoc ${FILES} --template=../template.html --toc -V toc-title:"Table of content
 pandoc ${FILES} --toc -V toc-title:"Table of contents" -V title:"$TITLE_EN"  -o ../../${DEST}manual_english.pdf
 
 cd ../..
-
-
-# zip -r ${DEST}.zip $DEST

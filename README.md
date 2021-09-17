@@ -1,11 +1,12 @@
 # go-starter project
+You will need to change the url in `go.mod` and the names in `.env` and `Makefile` to match your project name & VCS hoster
 
-## Structure des dossiers 
+## Folder structure
 ### configs
-Les fichiers de configuration du programme
+config file
 ### internal
-Les fichiers sources concernant le programme
+Code that won’t be reusable in other projects
 ### pkg 
-Les fichiers sources pouvant être réutilisés (ex : système de log)
+Code that can be reused in other projects like log system
 ### assets
-Fichiers utilisés par le programme (ici le certificat et la clef)
+Fichiers utilisés par le programme
