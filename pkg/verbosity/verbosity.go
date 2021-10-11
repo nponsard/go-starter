@@ -4,25 +4,34 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path"
+	"runtime"
 
 	"github.com/TwinProduction/go-color"
 )
 
 var (
-	logToFile log.Logger
-	verbose   = false
-	saveLog   = true
+	logToFile   log.Logger
+	verbose     = false
+	saveLog     = false
+	logFilePath string
 )
 
 // Set verbosity level and log file
-func SetupLog(VerbosityActive bool, logPath string, SaveLog bool) {
-	saveLog = SaveLog
+func SetupLog(VerbosityActive bool, logPath string) {
 	verbose = VerbosityActive
+	logFilePath = logPath
+}
+
+// Enable log file saving
+func SetLogging(active bool) {
+	saveLog = active
 
 	// Opens the log file in append mode
+
 	if saveLog {
 
-		logFile, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		logFile, err := os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
 		// can’t open file, exit
 
@@ -32,24 +41,30 @@ func SetupLog(VerbosityActive bool, logPath string, SaveLog bool) {
 
 		// create logger
 
-		logToFile = *log.New(logFile, "", log.LstdFlags)
+		logToFile = *log.New(logFile, "", log.Ldate|log.Ltime)
 
 		logToFile.Println("------- New execution")
+
 		logToFile.Println(os.Args)
 	}
+
 }
 
 // Writes to terminal an log file
 func doubleLog(chosenColor string, level string, v ...interface{}) {
 
+	_, file, line, _ := runtime.Caller(2)
+
 	// show debug to terminal only when verbose
 
 	if level != "Debug : " || verbose {
 
-		// no timestamp in the terminal
-
 		fmt.Print(chosenColor)
-		fmt.Print(level)
+		if level == "" {
+			fmt.Print(level)
+		} else {
+			fmt.Printf("%-20s %8s", path.Base(file)+":"+fmt.Sprint(line), level)
+		}
 		fmt.Print(v...)
 		fmt.Print(color.Reset)
 		fmt.Println()
@@ -57,9 +72,13 @@ func doubleLog(chosenColor string, level string, v ...interface{}) {
 
 	if saveLog {
 
+		if level == "" {
+			level = "Info : "
+		}
+
 		// Save to file
 
-		a := append([]interface{}{level}, v...)
+		a := append([]interface{}{fmt.Sprintf("%-25s %8s", path.Base(file)+":"+fmt.Sprint(line), level)}, v...)
 		logToFile.Println(a...)
 	}
 }
@@ -87,5 +106,5 @@ func Fatal(v ...interface{}) {
 
 // Show a warning
 func Warning(v ...interface{}) {
-	doubleLog(color.Yellow, "Warning : ", v...)
+	doubleLog(color.Yellow, "Warn : ", v...)
 }
