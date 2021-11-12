@@ -41,7 +41,7 @@ func main() {
 
 		// Configure the logs
 
-		verbosity.SetupLog(*verbose, path.Join(defaultPath, "logs.txt"))
+		verbosity.SetupLog(*verbose, path.Join(defaultPath, "logs.txt"),version)
 
 		verbosity.SetLogging(!*disableLogs)
 
