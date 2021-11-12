@@ -11,16 +11,19 @@ import (
 )
 
 var (
-	logToFile   log.Logger
-	verbose     = false
-	saveLog     = false
-	logFilePath string
+	logToFile      log.Logger
+	verbose        = false
+	saveLog        = false
+	logFilePath    string
+	CurrentVersion string
 )
 
 // Set verbosity level and log file
-func SetupLog(VerbosityActive bool, logPath string) {
+func SetupLog(VerbosityActive bool, logPath string, version string) {
+	CurrentVersion = version
 	verbose = VerbosityActive
 	logFilePath = logPath
+	SetLogging(saveLog)
 }
 
 // Enable log file saving
@@ -43,7 +46,7 @@ func SetLogging(active bool) {
 
 		logToFile = *log.New(logFile, "", log.Ldate|log.Ltime)
 
-		logToFile.Println("------- New execution")
+		logToFile.Println("------- New execution, version " + CurrentVersion)
 
 		logToFile.Println(os.Args)
 	}
