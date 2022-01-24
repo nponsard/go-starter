@@ -1,8 +1,8 @@
 package ping
 
 import (
+	"github.com/NilsPonsard/verbosity"
 	cli "github.com/jawher/mow.cli"
-	"github.com/nilsponsard/go-starter/pkg/verbosity"
 )
 
 // setup ping command

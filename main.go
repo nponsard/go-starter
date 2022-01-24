@@ -4,10 +4,10 @@ import (
 	"os"
 	"path"
 
+	"github.com/NilsPonsard/verbosity"
 	cli "github.com/jawher/mow.cli"
 	"github.com/nilsponsard/go-starter/internal/commands"
 	"github.com/nilsponsard/go-starter/pkg/files"
-	"github.com/nilsponsard/go-starter/pkg/verbosity"
 )
 
 // Version will be set by the script build.sh
@@ -41,7 +41,7 @@ func main() {
 
 		// Configure the logs
 
-		verbosity.SetupLog(*verbose, path.Join(defaultPath, "logs.txt"),version)
+		verbosity.SetupLog(*verbose, path.Join(defaultPath, "logs.txt"), version)
 
 		verbosity.SetLogging(!*disableLogs)
 
