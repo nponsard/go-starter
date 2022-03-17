@@ -1,6 +1,5 @@
 log/*
 .DS_Store
-go.sum
 log.log
 docs
 publish
