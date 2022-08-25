@@ -13,28 +13,32 @@ You will need to change the url in `go.mod` and the names in `.env` and `Makefil
 - `make all` : builds for Windows, linux generic and Ubuntu/debian (deb), builds the manuals and put everything in the `publish` folder
 - `make` : builds for your current platform
 
-
 ## Folder structure
+
+### assets
+
+Non source files used in the program
 
 ### configs
 
 config file
 
+### DEBIAN
+
+Configuration file for packaging a .deb package.
+
 ### internal
 
 Code that won’t be reusable in other projects
 
-### pkg 
+### manuals
+
+Sources files to build a manual
+TODO : document how to write and build a documentation
+
+### pkg
 
 Code that can be reused in other projects like log system
-
-### assets
-
-Files used in the program
-
-### DEBIAN
-
-Configuration file for packaging a .deb package.
 
 ### scripts
 
