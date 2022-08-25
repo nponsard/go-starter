@@ -26,6 +26,7 @@ config file
 ### DEBIAN
 
 Configuration file for packaging a .deb package.
+Update dependencies in DEBIAN/control.
 
 ### internal
 

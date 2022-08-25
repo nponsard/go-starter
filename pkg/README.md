@@ -1,1 +1,1 @@
-Put here the code that can be reused in other projects
+Put here the code that can imported in other projects.
