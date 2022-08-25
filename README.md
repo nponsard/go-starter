@@ -8,6 +8,11 @@ You will need to change the url in `go.mod` and the names in `.env` and `Makefil
 - go
 - pandoc for manual generation
 
+## Boostraping
+
+Use `./bootsrap.sh <project-uri>` to rename every import automatically.
+Example project uri : `github.com/nilsponsard/go-starter`
+
 ## make commands
 
 - `make all` : builds for Windows, linux generic and Ubuntu/debian (deb), builds the manuals and put everything in the `publish` folder
