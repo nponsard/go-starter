@@ -18,4 +18,4 @@ do
     fi
 done
 
-rm ./bootsrap.sh
+rm ./bootstrap.sh
