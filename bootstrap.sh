@@ -13,8 +13,8 @@ files=(./main.go ./.env ./internal/commands/commands.go  ./internal/commands/pin
 for file in "${files[@]}"
 do
     if [ -f $file ]; then
-      sed -i 's/github.com\/nilsponsard\/go-starter/'$MOD_URI'/g' $file
-      sed -i 's/go-starter/'$MOD_NAME'/g' $file
+      sed -i 's|github.com/nilsponsard/go-starter|'$MOD_URI'|g' $file
+      sed -i 's|go-starter|'$MOD_NAME'|g' $file
     fi
 done
 
