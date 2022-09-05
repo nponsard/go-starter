@@ -1,3 +1,3 @@
 #!/bin/sh
-. ./.env
+. ./build-config
 go build -ldflags "-X main.version=${VERSION}"

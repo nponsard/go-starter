@@ -1,5 +1,5 @@
 #!/bin/sh
-. ./.env
+. ./build-config
 
 DEST="./package/${NAME}_${VERSION}_"
 FILES="README.md" # add pages here in the order you want them to stack

@@ -1,0 +1,3 @@
+NAME="go-starter"
+DESCRIPTION="go starter project"
+VERSION=$(cat VERSION)

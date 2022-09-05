@@ -1,5 +1,5 @@
 #!/bin/sh
-. ./.env
+. ./build-config
 
 rm -rf publish
 mkdir -p publish
