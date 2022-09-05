@@ -8,7 +8,7 @@ if [ -z "$MOD_URI" ]; then
     exit 1
 fi
 
-files=(./main.go ./.env ./internal/commands/commands.go  ./internal/commands/ping/ping.go  ./.gitignore  ./go.mod  ./Makefile )
+files=(./main.go ./build-config ./internal/commands/commands.go  ./internal/commands/ping/ping.go  ./.gitignore  ./go.mod  ./Makefile )
 
 for file in "${files[@]}"
 do

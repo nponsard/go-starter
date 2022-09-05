@@ -1,5 +1,5 @@
 #!/bin/sh
-. ./.env
+. ./build-config
 
 DESTDIR="./package/${NAME}_${VERSION}_Ubuntu-Debian_amd64"
 

@@ -1,0 +1,34 @@
+permissions:
+  contents: write
+
+name: Release
+
+on: 
+  release:
+    types: [published]
+jobs:
+  setup-release:
+    runs-on: ubuntu-latest
+    name: Setup release 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+      - name: setup dependencies
+        run: |
+          sudo apt-get install -y make pandoc 
+      - name: setup version
+        run: |
+          echo "${{github.event.release.tag_name}}" > VERSION
+
+      - name: Build
+        run: make all
+      - name: Test
+        run: go test -v ./...
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: 'package/*'
