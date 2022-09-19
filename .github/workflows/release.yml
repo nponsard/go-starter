@@ -23,11 +23,10 @@ jobs:
       - name: setup version
         run: |
           echo "${{github.event.release.tag_name}}" > VERSION
-
+      - name: get dependencies
+        run: go get -v -t -d ./...
       - name: Build
         run: make all
-      - name: Test
-        run: go test -v ./...
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
