@@ -8,15 +8,15 @@ on:
     types: [published]
 jobs:
   setup-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     name: Setup release 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
-          go-version: 1.17
+          go-version: 1.18
       - name: setup dependencies
         run: |
           sudo apt-get install -y make pandoc 
@@ -25,6 +25,8 @@ jobs:
           echo "${{github.event.release.tag_name}}" > VERSION
       - name: get dependencies
         run: go get -v -t -d ./...
+      - name: Test
+        run: go test -v ./...
       - name: Build
         run: make all
       - name: Upload Release Asset
